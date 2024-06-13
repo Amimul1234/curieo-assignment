@@ -8,9 +8,9 @@ public class Bank {
     private final List<Transaction> transactions;
 
     public Bank(int initialReserve) {
+        this.queries = new ArrayList<>();
         this.initialReserve = initialReserve;
         this.transactions = new ArrayList<>();
-        this.queries = new ArrayList<>();
     }
 
     public void addTransaction(Transaction transaction) {
@@ -31,9 +31,9 @@ public class Bank {
 
     private int processQuery(Query query) {
         int reserve = initialReserve;
+        int declinedTransactions = 0;
         List<Transaction> deposits = new ArrayList<>();
         List<Transaction> withdrawals = new ArrayList<>();
-        int declinedTransactions = 0;
 
         for (Transaction transaction : transactions) {
             if (transaction.timestamp() >= query.startTime() && transaction.timestamp() < query.endTime()) {
